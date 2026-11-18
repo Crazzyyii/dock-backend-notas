@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas Cloud • BackEnd</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #07090e;
+        }
+
+        /* Efecto Liquid Orbs en movimiento suave */
+        .liquid-orb-1 {
+            position: absolute;
+            top: 5%;
+            left: 10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.45) 0%, rgba(59, 130, 246, 0.2) 60%, transparent 80%);
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+            animation: float 14s ease-in-out infinite alternate;
+        }
+
+        .liquid-orb-2 {
+            position: absolute;
+            bottom: 10%;
+            right: 8%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(236, 72, 153, 0.25) 60%, transparent 80%);
+            filter: blur(95px);
+            z-index: 0;
+            pointer-events: none;
+            animation: float 18s ease-in-out infinite alternate-reverse;
+        }
+
+        .liquid-orb-3 {
+            position: absolute;
+            top: 45%;
+            left: 40%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.25) 0%, rgba(14, 165, 233, 0.15) 70%, transparent 80%);
+            filter: blur(85px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -30px) scale(1.08); }
+            100% { transform: translate(-30px, 40px) scale(0.95); }
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+        }
+
+        .glass-card {
+            background: rgba(18, 24, 38, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 15px 35px -5px rgba(6, 182, 212, 0.25);
+            background: rgba(24, 32, 50, 0.7);
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen relative overflow-x-hidden flex flex-col justify-between selection:bg-cyan-500 selection:text-black">
+
+    <!-- Orbes Liquidos de Fondo -->
+    <div class="liquid-orb-1"></div>
+    <div class="liquid-orb-2"></div>
+    <div class="liquid-orb-3"></div>
+
+    <div class="relative z-10">
+        <!-- Barra de Navegacion Glass -->
+        <header class="max-w-6xl mx-auto px-4 pt-6">
+            <nav class="glass-panel rounded-2xl px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold tracking-tight text-white block leading-none">CloudNotes</span>
+                        <span class="text-[11px] text-cyan-400 font-semibold uppercase tracking-wider">PostgreSQL + Docker</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <span class="hidden sm:inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
+                        Render Live
+                    </span>
+                    <a href="/admin/" class="glass-panel hover:bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-xl transition duration-200 border border-white/20 flex items-center space-x-2 shadow-sm">
+                        <span>Panel Admin</span>
+                        <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Titulo Principal -->
+        <main class="max-w-6xl mx-auto px-4 py-12">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs uppercase tracking-widest font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 px-3 py-1 rounded-full border border-cyan-500/20 bg-cyan-500/5 inline-block mb-3">
+                    Programación Back End
+                </span>
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+                    Tablero de Notas <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">
+                        en la Nube
+                    </span>
+                </h1>
+                <p class="text-slate-400 text-sm sm:text-base">
+                    Datos sincronizados en tiempo real mediante PostgreSQL alojado en Render y contenedorizado con Docker.
+                </p>
+            </div>
+
+            <!-- Grilla de Tarjetas Glass -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for nota in notas %}
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[11px] font-semibold text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 px-3 py-1 rounded-lg">
+                                Nota #{{ forloop.counter }}
+                            </span>
+                            <span class="text-xs text-slate-400 flex items-center">
+                                <svg class="w-3.5 h-3.5 mr-1 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                {{ nota.created_at|date:"d M Y, H:i" }}
+                            </span>
+                        </div>
+                        <h2 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                            {{ nota.title }}
+                        </h2>
+                        <p class="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
+                            {{ nota.content }}
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-500">
+                        <span>PostgreSQL DB</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-span-full glass-panel rounded-2xl p-12 text-center max-w-md mx-auto">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Aún no hay notas</h3>
+                    <p class="text-sm text-slate-400 mb-6">Ejecuta el seed o entra al panel de administración para crear tu primera nota.</p>
+                    <a href="/admin/" class="inline-block px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-sm hover:opacity-90 shadow-lg shadow-cyan-500/25">
+                        Ir al Admin
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer Glass -->
+    <footer class="relative z-10 border-t border-white/5 py-8 mt-12 bg-black/30 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 space-y-3 sm:space-y-0">
+            <p>
+                Cátedra <strong class="text-slate-200">Programación Back End</strong> • Docente <strong class="text-cyan-400">Helton Smith Bustos Sáez</strong>
+            </p>
+            <p class="text-slate-500">
+                Django 4.2 • PostgreSQL • Docker Compose • Render Cloud
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
