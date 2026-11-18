@@ -4,10 +4,10 @@
 
 {% block extrastyle %}
 {{ block.super }}
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
     /* =========================================
-       LIQUID GLASS THEME PARA DJANGO ADMIN
+       LIQUID GLASS THEME PULIDO PARA DJANGO ADMIN
        ========================================= */
     :root {
         --primary: #06b6d4;
@@ -19,39 +19,49 @@
         --text-muted: #94a3b8;
     }
 
-    /* Fondo Líquido Neón */
+    /* 1. OCULTAR ELEMENTOS BLANCOS / NATIVOS MOLESTOS */
+    #skip-to-content, 
+    .skip-to-content-link, 
+    a[href="#content"],
+    .theme-toggle, 
+    #theme-toggle {
+        display: none !important;
+    }
+
+    /* 2. FONDO LÍQUIDO NEÓN */
     body {
         font-family: 'Plus Jakarta Sans', sans-serif !important;
         background-color: var(--bg-dark) !important;
         background-image: 
-            radial-gradient(circle at 15% 10%, rgba(6, 182, 212, 0.18) 0%, transparent 40%),
-            radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.18) 0%, transparent 45%) !important;
+            radial-gradient(circle at 15% 10%, rgba(6, 182, 212, 0.2) 0%, transparent 45%),
+            radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.2) 0%, transparent 50%) !important;
         background-attachment: fixed !important;
         color: var(--text-main) !important;
         margin: 0;
         min-height: 100vh;
     }
 
-    /* Barra Superior (Header Glass) */
+    /* 3. BARRA SUPERIOR (HEADER GLASS) */
     #header {
-        background: rgba(15, 23, 42, 0.75) !important;
+        background: rgba(15, 23, 42, 0.8) !important;
         backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
         border-bottom: 1px solid var(--glass-border) !important;
         color: #fff !important;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5) !important;
-        padding: 14px 40px !important;
+        padding: 16px 35px !important;
     }
 
     #site-name a {
         font-weight: 800 !important;
-        font-size: 1.25rem !important;
+        font-size: 1.35rem !important;
         background: linear-gradient(135deg, #06b6d4, #8b5cf6) !important;
         -webkit-background-clip: text !important;
         -webkit-text-fill-color: transparent !important;
         letter-spacing: -0.5px !important;
     }
 
+    /* Herramientas de usuario y botón Log Out */
     #user-tools {
         color: var(--text-muted) !important;
         font-size: 0.85rem !important;
@@ -64,28 +74,64 @@
     #user-tools a:hover {
         color: #fff !important;
     }
+    #user-tools form {
+        display: inline !important;
+    }
+    #user-tools form button, #user-tools button {
+        background: transparent !important;
+        border: none !important;
+        color: #f87171 !important;
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        margin-left: 6px !important;
+    }
+    #user-tools form button:hover, #user-tools button:hover {
+        color: #ef4444 !important;
+        text-decoration: underline !important;
+    }
 
-    /* Migas de pan (Breadcrumbs) */
+    /* 4. MIGAS DE PAN (BREADCRUMBS) */
     div.breadcrumbs {
-        background: rgba(15, 23, 42, 0.45) !important;
+        background: rgba(15, 23, 42, 0.5) !important;
         backdrop-filter: blur(10px) !important;
         border-bottom: 1px solid var(--glass-border) !important;
         color: var(--text-muted) !important;
-        padding: 10px 40px !important;
+        padding: 12px 35px !important;
         font-size: 0.85rem !important;
     }
     div.breadcrumbs a {
         color: #38bdf8 !important;
+        font-weight: 500 !important;
     }
 
-    /* Módulos y Cajas Glass */
+    /* 5. BARRA LATERAL (NAV-SIDEBAR) & FILTRO */
+    #nav-sidebar {
+        background: rgba(15, 23, 42, 0.6) !important;
+        border-right: 1px solid var(--glass-border) !important;
+    }
+    #nav-filter {
+        background: rgba(15, 23, 42, 0.7) !important;
+        border-bottom: 1px solid var(--glass-border) !important;
+        padding: 10px !important;
+    }
+    #nav-filter input {
+        background: rgba(30, 41, 59, 0.7) !important;
+        border: 1px solid var(--glass-border) !important;
+        border-radius: 8px !important;
+        color: #fff !important;
+        padding: 6px 12px !important;
+    }
+
+    /* 6. MÓDULOS Y CAJAS GLASS */
     .module, .inline-group, #changelist {
         background: var(--glass-bg) !important;
         backdrop-filter: blur(16px) !important;
         -webkit-backdrop-filter: blur(16px) !important;
         border: 1px solid var(--glass-border) !important;
         border-radius: 16px !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
         overflow: hidden !important;
         margin-bottom: 24px !important;
     }
@@ -98,7 +144,7 @@
         border-bottom: 1px solid var(--glass-border) !important;
     }
 
-    /* Tablas Glass */
+    /* 7. TABLAS GLASS */
     table {
         background: transparent !important;
         border-collapse: collapse !important;
@@ -112,7 +158,7 @@
         text-transform: uppercase !important;
         letter-spacing: 0.05em !important;
         border-bottom: 1px solid var(--glass-border) !important;
-        padding: 12px 16px !important;
+        padding: 12px 18px !important;
     }
 
     tbody tr {
@@ -126,22 +172,18 @@
     }
 
     tbody td, tbody th {
-        padding: 12px 16px !important;
+        padding: 14px 18px !important;
         color: var(--text-main) !important;
     }
 
-    tbody tr.selected {
-        background: rgba(139, 92, 246, 0.2) !important;
-    }
-
-    /* Botones Neón & Gradientes */
+    /* 8. BOTONES GRADIENTES / NEÓN */
     .button, input[type=submit], input[type=button], .submit-row input, a.button {
         background: linear-gradient(135deg, #06b6d4, #3b82f6) !important;
         color: #fff !important;
         font-weight: 600 !important;
         border: none !important;
         border-radius: 10px !important;
-        padding: 8px 18px !important;
+        padding: 8px 20px !important;
         cursor: pointer !important;
         box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3) !important;
         transition: all 0.25s ease !important;
@@ -159,18 +201,13 @@
         box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3) !important;
     }
 
-    .button.default:hover, input[type=submit].default:hover {
-        box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5) !important;
-    }
-
-    /* Inputs y Campos de Texto */
-    input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], textarea, select {
-        background: rgba(15, 23, 42, 0.6) !important;
+    /* 9. INPUTS Y SELECTS */
+    input[type=text], input[type=password], input[type=email], textarea, select {
+        background: rgba(15, 23, 42, 0.7) !important;
         border: 1px solid var(--glass-border) !important;
         border-radius: 10px !important;
         color: #fff !important;
         padding: 8px 12px !important;
-        transition: all 0.2s ease !important;
     }
 
     input:focus, textarea:focus, select:focus {
@@ -179,32 +216,16 @@
         box-shadow: 0 0 12px rgba(6, 182, 212, 0.35) !important;
     }
 
-    /* Contenedor Principal */
+    /* Contenedor */
     #content {
-        padding: 30px 40px !important;
+        padding: 25px 35px !important;
     }
 
-    h1 {
-        font-weight: 800 !important;
-        letter-spacing: -0.5px !important;
-        color: #fff !important;
-    }
-
-    /* Enlaces */
     a:link, a:visited {
         color: #38bdf8 !important;
     }
     a:hover {
         color: #fff !important;
-    }
-
-    /* Mensajes de Éxito / Alertas */
-    ul.messagelist li.success {
-        background: rgba(16, 185, 129, 0.15) !important;
-        border: 1px solid rgba(16, 185, 129, 0.3) !important;
-        color: #34d399 !important;
-        border-radius: 12px !important;
-        backdrop-filter: blur(10px) !important;
     }
 </style>
 {% endblock %}
