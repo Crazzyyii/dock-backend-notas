@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from notes import views as notes_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Ruta principal con la pagina de inicio
+    path('', notes_views.index, name='index'),
 ]
