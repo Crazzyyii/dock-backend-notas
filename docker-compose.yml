@@ -1,35 +1,30 @@
 version: '3.8'
 
 services:
-  # Servicio de la Base de Datos PostgreSQL
   db:
     image: postgres:15-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
     environment:
-      - POSTGRES_DB=notes_db
-      - POSTGRES_USER=alumno
-      - POSTGRES_PASSWORD=secreta123
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
 
-  # Servicio de nuestra aplicación Django
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000 # Sobrescribe Gunicorn para desarrollo local
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
       - "8000:8000"
+    env_file:
+      - .env
     depends_on:
       - db
-    environment:
-      - DB_NAME=notes_db
-      - DB_USER=alumno
-      - DB_PASSWORD=secreta123
-      - DB_HOST=db # Apunta al nombre del servicio de arriba
-      - DB_PORT=5432
 
-# Volumen persistente para que la base de datos no se borre al apagar Docker
 volumes:
   postgres_data:
