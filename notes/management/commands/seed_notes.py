@@ -1,17 +1,23 @@
-# Archivo: notes/management/commands/seed_notes.py
 from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
 from notes.models import Nota
 
 class Command(BaseCommand):
-    # El mensaje de ayuda al ejecutar: python manage.py help seed_notes
-    help = 'Puebla la base de datos con notas de prueba'
+    help = 'Puebla la base de datos con notas de prueba y crea el superusuario'
 
     def handle(self, *args, **kwargs):
-        # Limpiamos notas previas para no duplicar al ejecutar el comando muchas veces
+        # 1. Crear el superusuario si no existe
+        if not User.objects.filter(username='admin').exists():
+            User.objects.create_superuser('admin', 'admin@correo.com', 'admin123')
+            self.stdout.write(self.style.SUCCESS('Superusuario "admin" creado con contraseña "admin123"'))
+        else:
+            self.stdout.write(self.style.NOTICE('El usuario "admin" ya existe.'))
+
+        # 2. Limpiamos notas previas para no duplicar
         Nota.objects.all().delete()
         self.stdout.write(self.style.WARNING('Viejas notas eliminadas.'))
 
-        # Datos simulados
+        # 3. Datos simulados
         notas_mock = [
             {"title": "Primera Clase", "content": "Aprendimos sobre entornos virtuales con el profesor Helton."},
             {"title": "DockerCompose", "content": "Levanta servicios simultáneos con facilidad."},
@@ -19,8 +25,6 @@ class Command(BaseCommand):
         ]
 
         for item in notas_mock:
-            # El método create hace el INSERT en SQL directamente
             Nota.objects.create(title=item['title'], content=item['content'])
 
-        # Mensaje de éxito en terminal de color verde
         self.stdout.write(self.style.SUCCESS('¡Semilla de notas plantada exitosamente!'))
