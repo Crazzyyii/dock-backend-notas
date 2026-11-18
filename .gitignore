@@ -1,0 +1,24 @@
+# Entorno virtual
+env/
+venv/
+ENV/
+
+# Variables de entorno secretas (NUNCA SUBIR A GITHUB)
+.env
+
+# Archivos compilados y cache de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Base de datos local SQLite (por si acaso)
+*.sqlite3
+db.sqlite3
+
+# Archivos de configuracion de IDEs
+.vscode/
+.idea/
+
+# Logs del sistema
+*.log
