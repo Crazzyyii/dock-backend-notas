@@ -20,4 +20,4 @@ COPY . /app/
 EXPOSE 8000
 
 # Comando por defecto al levantar el contenedor (usaremos Gunicorn en prod)
-CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py makemigrations notes && python manage.py migrate && python manage.py seed_notes && gunicorn core.wsgi:application --bind 0.0.0.0:8000"]
